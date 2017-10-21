@@ -44,6 +44,27 @@
             <tr>
                 <div id="netgain"/>
             </tr>
+            <tr><div>&nbsp;</div></tr>
+            <tr>
+                <div id="l2"/>
+            </tr>
+            <tr>
+                <div id="l2_"/> 
+            </tr>
+            <tr><div>&nbsp;</div></tr>
+            <tr>
+                <div id="l5"/>
+            </tr>
+            <tr>
+                <div id="l5_"/>
+            </tr>
+            <tr><div>&nbsp;</div></tr>
+            <tr>
+                <div id="l6"/>
+            </tr>
+            <tr>
+                <div id="l6_"/>
+            </tr>
         </tr>
     </table>
 </body>
@@ -64,6 +85,20 @@
             const netGain = net - base;
             const grossGain = gross - base;
 
+            const l2 = 1688.68;
+            const l2P = 5.75;
+            const l2A = 40.11;
+
+            const l5 = 2395.29;
+            const l5P = 4.25;
+            const l5A = 49.19;            
+
+            const l6 = 1285.03;
+            const l6P = 3.15;
+            const l6A = 28.47;
+
+            const lMonthly = 117.77;
+
             const baseText = `Base: $${format(base)}`;
             const strikePriceText = `Strike Price: $${format(strikePrice)} - ${discount * 100}% = $${discountStrikePrice.toFixed(2)}`;
             const currentPrice = `Current Price: $${format(inputPrice)}`;
@@ -74,6 +109,15 @@
             const netText = `Net: $${format(net)}`;
             const netGainText = `Net Gain: $${format(netGain)}`;
 
+            const l2Text = `Pay L2 ($${format(l2)} @ ${l2P}%): $${format(net - l2)}`;
+            const l2Text2 = `New monthly: $${format(lMonthly - l2A)}, save $${format(l2A * 12)}/yr save $${format(l2A)}/mo`;
+
+            const l2_5Text = `Pay L2+L5 ($${format(l2+l5)} @ ${l2P}%,${l5P}%): $${format(net - l2 - l5)}`;
+            const l2_5Text2 = `New monthly: $${format(lMonthly - l2A - l5A)}, save $${format((l2A + l5A) * 12)}/yr save $${format(l2A + l5A)}/mo`;
+
+            const l2_5_6Text = `Pay L2+L5+L6 (all: $${format(l2+l5+l6)} @ ${l2P}%,${l5P}%,${l6P}%): $${format(net - l2 - l5 - l6)}`;
+            const l2_5_6Text2 = `New monthly: $0, save $${format((l2A + l5A + l6A) * 12)}/yr save $${format(l2A + l5A + l6A)}/mo`;
+
             $('#base').text(baseText);
             $('#strikePrice').text(strikePriceText);
             $('#currentPrice').text(currentPrice);
@@ -83,6 +127,15 @@
             $('#net').text(netText);
             $('#grossgain').text(grossGainText);
             $('#netgain').text(netGainText);
+
+            $('#l2').text(l2Text);
+            $('#l2_').text(l2Text2);
+
+            $('#l5').text(l2_5Text);
+            $('#l5_').text(l2_5Text2);
+
+            $('#l6').text(l2_5_6Text);
+            $('#l6_').text(l2_5_6Text2);
         });
     });
 
