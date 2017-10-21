@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <table>
+        <tr>
+            <tr>
+                <td>
+                    Price: &nbsp;<input style="width:80px;" type="text" name="price" id="price"> <br>
+                    Debt: &nbsp;<input style="width:80px;" type="text" name="debt" id="debt"> <br>
+                    <button id="calc" type="button">Calculate</button>
+                </td>
+            </tr>
+            <tr>
+                <div id="base"/>
+            </tr>
+            <tr>
+                <div id="strikePrice"/>
+            </tr>
+            <tr>
+                <div id="currentPrice"/>
+            </tr>
+            <tr>
+                <div id="multiplier"/>
+            </tr>
+            <tr>
+                <div><strong id="gross"></strong></div>
+            </tr>
+            <tr>
+                <div id="debtText"/>
+            </tr>
+            <tr>
+                <div><strong id="net"></strong></div>
+            </tr>
+        </tr>
+    </table>
+</body>
+<script>
+    $(document).ready(function() {
+        $('#debt').val(4000);
+        $('#calc').click(function() {
+            const base = 8655.60;
+            const strikePrice = 152.15;
+            const discount = 0.15;
+            const discountStrikePrice = strikePrice * (1 - discount);
+
+            const inputPrice = parseFloat($('#price').val());
+            const multiplier = inputPrice / discountStrikePrice;
+            const debt = parseFloat($('#debt').val());
+            const gross = base * multiplier;
+            const net = gross - debt;
+
+            const baseText = `Base: $${format(base)}`;
+            const strikePriceText = `Strike Price: $${format(strikePrice)} - ${discount * 100}% = $${discountStrikePrice.toFixed(2)}`;
+            const currentPrice = `Current Price: $${format(inputPrice)}`;
+            const multiplierText = `Multiplier: ${multiplier.toFixed(6)}`;
+            const grossText = `Gross: $${format(gross)}`;
+            const debtText = `Debt: $${format(debt)}`;
+            const netText = `Net: $${format(net)}`;
+
+            $('#base').text(baseText);
+            $('#strikePrice').text(strikePriceText);
+            $('#currentPrice').text(currentPrice);
+            $('#multiplier').text(multiplierText);
+            $('#gross').text(grossText);
+            $('#debtText').text(debtText);
+            $('#net').text(netText);
+        });
+    });
+
+    function format(num) {
+        return num.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+    }
+</script>
+</html>
