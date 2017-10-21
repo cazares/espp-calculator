@@ -33,10 +33,16 @@
                 <div><strong id="gross"></strong></div>
             </tr>
             <tr>
+                <div id="grossgain"/>
+            </tr>
+            <tr>
                 <div id="debtText"/>
             </tr>
             <tr>
                 <div><strong id="net"></strong></div>
+            </tr>
+            <tr>
+                <div id="netgain"/>
             </tr>
         </tr>
     </table>
@@ -55,14 +61,18 @@
             const debt = parseFloat($('#debt').val());
             const gross = base * multiplier;
             const net = gross - debt;
+            const netGain = net - base;
+            const grossGain = gross - base;
 
             const baseText = `Base: $${format(base)}`;
             const strikePriceText = `Strike Price: $${format(strikePrice)} - ${discount * 100}% = $${discountStrikePrice.toFixed(2)}`;
             const currentPrice = `Current Price: $${format(inputPrice)}`;
             const multiplierText = `Multiplier: ${multiplier.toFixed(6)}`;
             const grossText = `Gross: $${format(gross)}`;
+            const grossGainText = `Gross Gain: $${format(grossGain)}`;
             const debtText = `Debt: $${format(debt)}`;
             const netText = `Net: $${format(net)}`;
+            const netGainText = `Net Gain: $${format(netGain)}`;
 
             $('#base').text(baseText);
             $('#strikePrice').text(strikePriceText);
@@ -71,6 +81,8 @@
             $('#gross').text(grossText);
             $('#debtText').text(debtText);
             $('#net').text(netText);
+            $('#grossgain').text(grossGainText);
+            $('#netgain').text(netGainText);
         });
     });
 
